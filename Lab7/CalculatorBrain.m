@@ -88,13 +88,20 @@
         case add:
             total = operand1 + operand2;
             break;
+        case divide:
+            total = operand1 / operand2;
+            break;
         default:
             break;
     }
     if ([self hasDecimalPlaces:operand1 _:operand2]) {
         _calculationString = [NSString stringWithFormat:@"%.02f", total];
     } else {
+        if ([self hasDecimalPlaces:total _:total]) {
+            _calculationString = [NSString stringWithFormat:@"%.02f", total];
+        } else {
         _calculationString = [NSString stringWithFormat:@"%d", (int)total];
+        }
     }
 }
 - (BOOL)recognizeAction: (int)tag {
